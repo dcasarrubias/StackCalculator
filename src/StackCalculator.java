@@ -15,15 +15,40 @@ public class StackCalculator {
 		
 		StackCalculator st = new StackCalculator();
 		
+		System.out.println("Print");
+		//invalid variable name. 2 of the same variables
+		for(int i = 1; i < s.length(); i++){
+			if(Character.isLetter(s.charAt(i)) && Character.isLetter(s.charAt(i - 1))){
+				System.out.println("Enter valid String");
+				s = input.nextLine();
+				processInput(s);
+				break;
+			}
+			
+		}
+		/////////////////////////////////////////////////////////////////////////////////////////////
+		//check for initialization of variable before use
+		for(int i = 0; i < s.length() ; i++){
+			/*char chh = s.charAt(i+1);
+			if(Character.isLetter(s.charAt(i)) && chh == '=' && (Character.isDigit(s.charAt(i+2)) )){
+				System.out.println("Success");
+			}
+			*/
+			if(s.charAt(i) == '='){
+				System.out.println("Success");
+			}
+			else System.out.println("failure");
+		}
 		// check for balanced parenthesis
 		if(st.checkParens(s) == false){
-			System.out.println("Enter a valid String: ");
+			System.out.println("invalid ");
 			s = input.nextLine();
 			processInput(s); 
 		}
 		//check for valid characters, numbers, and operators 
 		for(int i = 0; i < s.length(); i ++){
 			char c = s.charAt(i);
+			
 			
 			if(Character.isLetter(s.charAt(i)) || Character.isDigit(s.charAt(i)) || c == '*' || c == '(' || c == '^' || c == '%' || c == ')' || c == '=' || c == '+' || c == '-' || c == '/'){
 				continue;	
