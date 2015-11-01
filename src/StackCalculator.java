@@ -15,7 +15,12 @@ public class StackCalculator {
 		
 		StackCalculator st = new StackCalculator();
 		
-		st.character(s); // call method to check for balanced parenthesis
+		// check for balanced parenthesis
+		if(st.checkParens(s) == false){
+			System.out.println("Enter a valid String: ");
+			s = input.nextLine();
+			processInput(s); 
+		}
 		//check for valid characters, numbers, and operators 
 		for(int i = 0; i < s.length(); i ++){
 			char c = s.charAt(i);
@@ -46,36 +51,33 @@ public class StackCalculator {
 		sc.processInput(s);
 		
 	}
-	public boolean character(String str){
-		Stack<Character>s = new Stack<Character>();
+	public boolean checkParens(String str){
+		Stack<Character>stack = new Stack<Character>();
 		
 		for(int i = 0; i < str.length(); i++){
-			if(str.charAt(i) == '('){
-				s.push(str.charAt(i));
-			}
-		}
-		for(int x = 0; x < str.length(); x++){
-			if(str.charAt(x) == ')'){
+			char test = str.charAt(i);
+			if(test == '(')
+				stack.push(test);
+			else if(test == ')'){
+				if(stack.isEmpty())
+					return false;
+				switch(test){
 				
-				switch(str.charAt(x)){
-				case ')': if(s.peek().equals('(')){
-					s.pop();
+				case ')':
+					if(stack.pop() != '(')
+						return false;
+					break;
+					
+				default:
+					break;
 				}
-				break;
-				}
+		
 			}
+	
 		}
-		if(s.isEmpty()){
-			
-			return true;
-		}else{ 
-				System.out.println("Parenthesis are not balanced");
-				
-				return false;
-		}	
-		}
+		return stack.isEmpty();
+	}
 	}
 	
 	
-
 
